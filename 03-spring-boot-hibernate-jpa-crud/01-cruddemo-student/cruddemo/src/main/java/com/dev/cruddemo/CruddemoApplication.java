@@ -22,7 +22,7 @@ public class CruddemoApplication {
 
 			//createStudent(studentDAO);
 
-			//createMultipleStudents(studentDAO);
+			createMultipleStudents(studentDAO);
 
 			//readStudent(studentDAO);
 
@@ -30,8 +30,27 @@ public class CruddemoApplication {
 
 //			queryForStudentsByLastName(studentDAO);
 
-			updateStudent(studentDAO);
+//			updateStudent(studentDAO);
+
+//			deleteStudent(studentDAO);
+
+//			deleteAllStudents(studentDAO);
 		};
+	}
+
+	private void deleteAllStudents(StudentDAO studentDAO) {
+
+		System.out.println("Deleting all students.");
+		int numberOfRows = studentDAO.deleteAll();
+		System.out.println("Deleted " + numberOfRows + " students.");
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+
+		int studentId = 3;
+		System.out.println("Deleting student with id: " + studentId);
+		studentDAO.delete(studentId);
+
 	}
 
 	private void updateStudent(StudentDAO studentDAO) {
@@ -43,7 +62,7 @@ public class CruddemoApplication {
 		System.out.println("Existing student: " + student);
 
 		System.out.println("Updating student...");
-		student.setFirstName("Ciocoflender");
+		student.setFirstName("darian");
 
 		studentDAO.update(student);
 		System.out.println("Updated student: " + student);
