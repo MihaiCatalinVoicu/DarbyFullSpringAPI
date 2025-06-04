@@ -2,9 +2,10 @@ package com.dev.demo.rest;
 
 import com.dev.demo.entity.Student;
 import jakarta.annotation.PostConstruct;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,20 +37,9 @@ public class StudentRestController {
     public Student getStudent(@PathVariable int studentId) {
 
         if (studentId > students.size() || (studentId < 0) ) {
-            throw new StudentNotFoundException("Student id: " + " not found.");
+            throw new StudentNotFoundException("Student id: " + studentId + " not found.");
         }
 
         return students.get(studentId);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException e) {
-
-        StudentErrorResponse response = new StudentErrorResponse();
-        response.setStatus(HttpStatus.NOT_FOUND.value());
-        response.setMessage(e.getMessage());
-        response.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 }
